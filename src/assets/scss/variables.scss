@@ -1,0 +1,25 @@
+:root {
+  --primary-color: #3b82f6;
+  --primary-dark-color: #3977da;
+  --secondary-color: #60a5fa;
+  --accent-color: #10b981;
+  --accent-hover-color: #0f9d76;
+
+  --white: #ffffff;
+  --background-color: #f3f4f6;
+
+  --text-color: #374151;
+  --text-hover-color: #606c80;
+  --subtext-color: #5f646e;
+
+  --border-color: #6b7280;
+
+  --disabled-color: #d1d5db;
+
+  --icon-fill: var(--white);
+  --icon-stroke: var(--white);
+}
+
+:root {
+  --button-color: var(--white);
+}
