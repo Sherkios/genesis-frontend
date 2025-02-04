@@ -41,7 +41,7 @@ export const useEssenceStore = defineStore("essence", () => {
     }),
   );
 
-  const createEssence = async (type: TEssenceType) => {
+  const createEssence = async (type: TEssenceType): Promise<void | Error> => {
     try {
       const response: AxiosResponse<IEssenceCreateResponse> = await amoApi.post("essence", {
         type,
@@ -51,7 +51,7 @@ export const useEssenceStore = defineStore("essence", () => {
 
       _essences.value.push(essence);
     } catch (error) {
-      return error;
+      return new Error("Ошибка создания сущности");
     }
   };
 

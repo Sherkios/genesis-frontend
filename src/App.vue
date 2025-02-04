@@ -2,13 +2,17 @@
   <page-block class="app">
     <container-block class="app__container">
       <section-block class="app__section">
-        <template #section-block-title>Выберите механизм</template>
+        <template #section-block-title>Выберите сущность</template>
 
         <template #default>
           <div class="app__form">
-            <base-select v-model="model" :options>Механизм</base-select>
+            <base-select v-model="model" :options>Сущность</base-select>
 
             <base-button :disabled="isDisabled" :is-loading @click="create">Создать</base-button>
+
+            <div v-if="isError" class="app__error">
+              {{ error }}
+            </div>
           </div>
         </template>
       </section-block>
@@ -61,10 +65,29 @@ const { essences } = storeToRefs(store);
 
 const create = async () => {
   isLoading.value = true;
+
+  hideError();
+
   if (isEssenceType(model.value)) {
-    await store.createEssence(model.value);
+    const response = await store.createEssence(model.value);
+
+    if (response instanceof Error) {
+      error.value = response.message;
+      showError();
+    }
     isLoading.value = false;
   }
+};
+
+const isError = ref<boolean>(false);
+const error = ref<string>("");
+
+const showError = () => {
+  isError.value = true;
+};
+
+const hideError = () => {
+  isError.value = false;
 };
 </script>
 
@@ -82,6 +105,10 @@ const create = async () => {
     display: flex;
     flex-direction: column;
     gap: 8px;
+  }
+
+  &__error {
+    color: var(--negative-color);
   }
 }
 </style>
