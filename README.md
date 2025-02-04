@@ -1,3 +1,6 @@
-# npm install
-
-# npm run dev
+```bash
+$ npm install
+```
+```bash
+$ npm run dev
+```
