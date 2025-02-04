@@ -64,18 +64,20 @@ const store = useEssenceStore();
 const { essences } = storeToRefs(store);
 
 const create = async () => {
-  isLoading.value = true;
+  if (!isLoading.value) {
+    isLoading.value = true;
 
-  hideError();
+    hideError();
 
-  if (isEssenceType(model.value)) {
-    const response = await store.createEssence(model.value);
+    if (isEssenceType(model.value)) {
+      const response = await store.createEssence(model.value);
 
-    if (response instanceof Error) {
-      error.value = response.message;
-      showError();
+      if (response instanceof Error) {
+        error.value = response.message;
+        showError();
+      }
+      isLoading.value = false;
     }
-    isLoading.value = false;
   }
 };
 
